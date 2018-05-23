@@ -1,6 +1,6 @@
 #from demand_log_log_cross_item import DemandLogLogCrossItem
 # import json
-# from demand import Demand
+from demand import Demand
 from flask import Flask, jsonify
 app = Flask(__name__)
 
@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def hello():
-    return 'John Rules!!!!'
+    return 'John Rules!'
     
 #@app.route("/v1/model", methods=['GET'])
 #def generate_model():
