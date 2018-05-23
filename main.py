@@ -1,6 +1,6 @@
 from demand_log_log_cross_item import DemandLogLogCrossItem
 # import json
-from demand import Demand
+# from demand import Demand
 from flask import Flask, jsonify
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ def generate_model():
     return DemandLogLogCrossItem(N_items=3, T_periods=5, type_of_items='substitute', random_state=0).dump_model()
     
 
-
+ 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=80)
     # app.run(host='127.0.0.1', debug=True, port=8080)
