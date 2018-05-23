@@ -1,6 +1,7 @@
 #from demand_log_log_cross_item import DemandLogLogCrossItem
 # import json
 import numpy as np
+import pandas as pd
 from flask import Flask, jsonify
 app = Flask(__name__)
 
