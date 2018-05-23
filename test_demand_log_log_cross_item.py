@@ -23,10 +23,10 @@ class TestDemandLogLogCrossItem(unittest.TestCase):
         demand = DemandLogLogCrossItem(N_items=3, T_periods=5, type_of_items='complement', random_state=0)
         self.assertEqual(demand.model['delta_cross_item_effects'], {(1, 1): -309.230591119981, (1, 2): -382.67975329019174, (1, 3): -797.6952782499919, (2, 1): -274.48491812436407, (2, 2): -527.1662093642956, (2, 3): -418.4964456448831, (3, 1): -440.75304523947506, (3, 2): -892.7353030290711, (3, 3): -506.9367146933994})
 
-    def test_dump_load_model(self):
+    def test_export_load_model(self):
         demand = DemandLogLogCrossItem(N_items=3, T_periods=5, type_of_items='substitute', random_state=0)
         model_original = dict(demand.model)
-        model_dumped = demand.dump_model()
+        model_dumped = demand.export_model()
         model_loaded = demand.load_model(model_dumped)
         self.assertDictEqual(model_original, model_loaded)
     # def test_past_price_prod(self):
