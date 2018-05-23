@@ -45,6 +45,9 @@ class DemandLogLogCrossItem(Demand):
             self.model = model
         
     def dump_model(self):
+        '''
+        Dump a model to a json string.
+        '''
         model = dict(self.model)
         model['K_promotion_prices'] = {str(i): self.model['K_promotion_prices'][i] for i in self.model['i']} # Dict mapping items to randomly generated number of promotion prices (1 or 2).
         model['k'] = {str(i): self.model['k'][i] for i in self.model['i']} # Dict mapping items to price index lists (0-indexed). 
@@ -58,6 +61,9 @@ class DemandLogLogCrossItem(Demand):
         return json.dumps(model)
         
     def load_model(self, model):
+        '''
+        Load a model from a json string.
+        '''
         model = dict(json.loads(model))
         self.model['N_items'] = model['N_items'] # Number of items/products.
         self.model['T_periods'] = model['T_periods'] # Number of time periods.
@@ -73,6 +79,7 @@ class DemandLogLogCrossItem(Demand):
         self.model['M_num_past_prices'] = {i: model['M_num_past_prices'][str(i)] for i in model['i']} # Dict mapping items to randomly generated number of past prices to consider (memory).
         self.model['b_past_price_effects'] = {(i,k): model['b_past_price_effects'][str((i,k))] for i in model['i'] for k in range(1, model['M_num_past_prices'][str(i)]+1)} # Dict mapping item/past price combinations to randomly generated past price effects.
         self.model['delta_cross_item_effects'] = {(j,i): model['delta_cross_item_effects'][str((j,i))] for j in model['j'] for i in model['i']}
+        return self.model
     
     def past_price_prod(self, i, t, price_model):
         '''

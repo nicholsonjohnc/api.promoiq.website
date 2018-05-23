@@ -12,7 +12,7 @@ def hello():
     
 @app.route("/v1/model", methods=['GET'])
 def generate_model():
-    return DemandLogLogCrossItem(N_items=3, T_periods=5, type_of_items='substitute', random_state=0).dump_model()
+    return jsonify(model=DemandLogLogCrossItem(N_items=3, T_periods=5, type_of_items='substitute', random_state=0).dump_model())
     
 
  
