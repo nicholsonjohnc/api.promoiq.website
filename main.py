@@ -4,7 +4,9 @@ from plot_promotion_plan import PlotPromotionPlan
 # import json
 # from demand import Demand
 from flask import Flask, jsonify, Response, request
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 #from demand import Demand
 
