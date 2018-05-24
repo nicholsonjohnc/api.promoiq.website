@@ -64,7 +64,7 @@ class DemandLogLogCrossItem(Demand):
         '''
         Load a model from a json string.
         '''
-        model = dict(json.loads(model))
+        #  model = dict(json.loads(model))
         self.model['N_items'] = model['N_items'] # Number of items/products.
         self.model['T_periods'] = model['T_periods'] # Number of time periods.
         self.model['i'] = model['i'] # Item index list (1-indexed).
