@@ -19,7 +19,7 @@ def create():
     # params = request.get_json()
     # return DemandLogLogCrossItem(N_items=params['N_items'], T_periods=params['T_periods'], type_of_items=params['type_of_items']).dump_model()
     # return DemandLogLogCrossItem(N_items=3, T_periods=13, type_of_items='substitute').dump_model()
-    return {'request data': request.data}
+    return jsonify(method=request.method)
 
 @app.route("/v1/plot", methods=['GET'])
 def plot():
