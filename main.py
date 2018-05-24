@@ -22,9 +22,9 @@ def create():
 @app.route("/v1/plot", methods=['POST'])
 def plot():
     model = request.get_json()
-    demand = DemandLogLogCrossItem(model=model)
-    price = PriceDiscrete(model=model)
-    plot = PlotPromotionPlan(model=model, price=price).plot()
+    demand = DemandLogLogCrossItem().load_model(model=model)
+    price = PriceDiscrete(model=demand.model)
+    plot = PlotPromotionPlan(model=demand.model, price=price).plot()
     # return plot
     return Response(plot, mimetype='text/xml')
     # return jsonify(price.gamma_decision_variable)
