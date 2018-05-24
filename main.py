@@ -1,6 +1,7 @@
 from demand_log_log_cross_item import DemandLogLogCrossItem
 from price_discrete import PriceDiscrete
 from plot_promotion_plan import PlotPromotionPlan
+import json
 # import json
 # from demand import Demand
 from flask import Flask, jsonify, Response, request
@@ -21,10 +22,10 @@ def create():
 
 @app.route("/v1/plot", methods=['POST'])
 def plot():
-    model = request.get_json()
-    demand = DemandLogLogCrossItem().load_model(model=model)
-    price = PriceDiscrete(model=demand.model)
-    plot = PlotPromotionPlan(model=demand.model, price=price).plot()
+    params = request.get_json()
+    model = DemandLogLogCrossItem().load_model(json.dumps(params))
+    price = PriceDiscrete(model=model)
+    plot = PlotPromotionPlan(model=model, price=price).plot()
     # return plot
     return Response(plot, mimetype='text/xml')
     # return jsonify(price.gamma_decision_variable)

@@ -14,8 +14,9 @@ class DemandLogLogCrossItem(Demand):
     def __init__(self, N_items=3, T_periods=13, type_of_items='substitute', random_state=None, model=None):
         Demand.__init__(self)
         
+        self.model = {}
+        
         if model is None:
-            self.model = {}
             np.random.seed(random_state)
             self.model['N_items'] = N_items # Number of items/products.
             self.model['T_periods'] = T_periods # Number of time periods.
@@ -64,7 +65,7 @@ class DemandLogLogCrossItem(Demand):
         '''
         Load a model from a json string.
         '''
-        #  model = dict(json.loads(model))
+        model = dict(json.loads(model))
         self.model['N_items'] = model['N_items'] # Number of items/products.
         self.model['T_periods'] = model['T_periods'] # Number of time periods.
         self.model['i'] = model['i'] # Item index list (1-indexed).
