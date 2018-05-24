@@ -66,21 +66,22 @@ class DemandLogLogCrossItem(Demand):
         Load a model from a json string.
         '''
         model = dict(json.loads(model))
-        self.model['N_items'] = model['N_items'] # Number of items/products.
-        self.model['T_periods'] = model['T_periods'] # Number of time periods.
-        self.model['i'] = model['i'] # Item index list (1-indexed).
-        self.model['j'] = model['j'] # Cross-item index list (1-indexed).
-        self.model['t'] = model['t'] # Time index (1-indexed).
-        self.model['K_promotion_prices'] = {i: model['K_promotion_prices'][str(i)] for i in model['i']} # Dict mapping items to randomly generated number of promotion prices (1 or 2).
-        self.model['k'] = {i: model['k'][str(i)] for i in model['i']} # Dict mapping items to price index lists (0-indexed). 
-        self.model['a_seasonality'] = {(i,t): model['a_seasonality'][str((i,t))] for i in model['i'] for t in model['t']} # Dict mapping item/time combinations to randomly generated seasonality coefficients.
-        self.model['b_0_price_sensitivity'] = {i: model['b_0_price_sensitivity'][str(i)] for i in model['i']} # Dict mapping items to randomly generated price sensitivities (elasticities).
-        self.model['Q_price_ladder'] = {(i,k): model['Q_price_ladder'][str((i,k))] for i in model['i'] for k in model['k'][str(i)]}  # Price ladder dict mapping item/price index combinations to prices between 1 (base/regular price normalized) and 0.65.
-        self.model['gamma_decision_variable'] = {(i,t,k): model['gamma_decision_variable'][str((i,t,k))] for i in model['i'] for t in model['t'] for k in model['k'][str(i)]} # Dict mapping item/time/price index combinations to randomly generated integer (binary) decision variables that act to select exactly one price from the price ladder for each item at each time.
-        self.model['M_num_past_prices'] = {i: model['M_num_past_prices'][str(i)] for i in model['i']} # Dict mapping items to randomly generated number of past prices to consider (memory).
-        self.model['b_past_price_effects'] = {(i,k): model['b_past_price_effects'][str((i,k))] for i in model['i'] for k in range(1, model['M_num_past_prices'][str(i)]+1)} # Dict mapping item/past price combinations to randomly generated past price effects.
-        self.model['delta_cross_item_effects'] = {(j,i): model['delta_cross_item_effects'][str((j,i))] for j in model['j'] for i in model['i']}
-        return self.model
+        new_model = {}
+        new_model['N_items'] = model['N_items'] # Number of items/products.
+        new_model['T_periods'] = model['T_periods'] # Number of time periods.
+        new_model['i'] = model['i'] # Item index list (1-indexed).
+        new_model['j'] = model['j'] # Cross-item index list (1-indexed).
+        new_model['t'] = model['t'] # Time index (1-indexed).
+        new_model['K_promotion_prices'] = {i: model['K_promotion_prices'][str(i)] for i in model['i']} # Dict mapping items to randomly generated number of promotion prices (1 or 2).
+        new_model['k'] = {i: model['k'][str(i)] for i in model['i']} # Dict mapping items to price index lists (0-indexed). 
+        new_model['a_seasonality'] = {(i,t): model['a_seasonality'][str((i,t))] for i in model['i'] for t in model['t']} # Dict mapping item/time combinations to randomly generated seasonality coefficients.
+        new_model['b_0_price_sensitivity'] = {i: model['b_0_price_sensitivity'][str(i)] for i in model['i']} # Dict mapping items to randomly generated price sensitivities (elasticities).
+        new_model['Q_price_ladder'] = {(i,k): model['Q_price_ladder'][str((i,k))] for i in model['i'] for k in model['k'][str(i)]}  # Price ladder dict mapping item/price index combinations to prices between 1 (base/regular price normalized) and 0.65.
+        new_model['gamma_decision_variable'] = {(i,t,k): model['gamma_decision_variable'][str((i,t,k))] for i in model['i'] for t in model['t'] for k in model['k'][str(i)]} # Dict mapping item/time/price index combinations to randomly generated integer (binary) decision variables that act to select exactly one price from the price ladder for each item at each time.
+        new_model['M_num_past_prices'] = {i: model['M_num_past_prices'][str(i)] for i in model['i']} # Dict mapping items to randomly generated number of past prices to consider (memory).
+        new_model['b_past_price_effects'] = {(i,k): model['b_past_price_effects'][str((i,k))] for i in model['i'] for k in range(1, model['M_num_past_prices'][str(i)]+1)} # Dict mapping item/past price combinations to randomly generated past price effects.
+        new_model['delta_cross_item_effects'] = {(j,i): model['delta_cross_item_effects'][str((j,i))] for j in model['j'] for i in model['i']}
+        return new_model
     
     def past_price_prod(self, i, t, price_model):
         '''
