@@ -18,14 +18,13 @@ def hello():
 def create():
     params = request.get_json()
     return DemandLogLogCrossItem(N_items=params['N_items'], T_periods=params['T_periods'], type_of_items=params['type_of_items']).dump_model()
-    # return DemandLogLogCrossItem(N_items=3, T_periods=13, type_of_items='substitute').dump_model()
-    # return jsonify(p=params)
 
-@app.route("/v1/plot", methods=['GET'])
+@app.route("/v1/plot", methods=['POST'])
 def plot():
-    demand = DemandLogLogCrossItem(N_items=3, T_periods=5, type_of_items='substitute')
-    price = PriceDiscrete(demand.model)
-    plot = PlotPromotionPlan(model=demand.model, price=price).plot()
+    model = request.get_json()
+    # demand = DemandLogLogCrossItem(model=model)
+    price = PriceDiscrete(model=model)
+    plot = PlotPromotionPlan(model=model, price=price).plot()
     # return plot
     return Response(plot, mimetype='text/xml')
  

@@ -11,7 +11,7 @@ class DemandLogLogCrossItem(Demand):
     Class for generating a log-log demand self.model with additive linear cross-item effects.
     '''
     
-    def __init__(self, N_items, T_periods, type_of_items, random_state=None, model=None):
+    def __init__(self, N_items=3, T_periods=13, type_of_items='substitute', random_state=None, model=None):
         Demand.__init__(self)
         
         if model is None:
