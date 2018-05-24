@@ -1,12 +1,12 @@
 import matplotlib as mpl
 mpl.use('Agg')
-mpl.rcParams['font.size'] = 16
-mpl.rcParams['legend.fontsize'] = 'medium'
-mpl.rcParams['figure.titlesize'] = 'medium'
+mpl.rcParams['font.size'] = 14
+mpl.rcParams['legend.fontsize'] = 'small'
+mpl.rcParams['figure.titlesize'] = 'small'
 mpl.rcParams['xtick.major.width'] = 1
 mpl.rcParams['ytick.major.width'] = 1
 mpl.rcParams['axes.linewidth'] = 1
-mpl.rcParams['axes.titlesize'] = 'large'
+mpl.rcParams['axes.titlesize'] = 'medium'
 import matplotlib.pyplot as plt
 
 from io import StringIO

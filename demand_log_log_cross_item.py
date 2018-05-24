@@ -101,7 +101,6 @@ class DemandLogLogCrossItem(Demand):
         '''
         return self.model['a_seasonality'][i,t] * exp(-self.model['b_0_price_sensitivity'][i] * log(price_model.price_func(i,t))) * self.past_price_prod(i, t, price_model) + self.cross_item_sum(i, t, price_model)
         
-        
 if __name__ == '__main__':
     log_log_demand = DemandLogLogCrossItem(N_items=3, T_periods=5, type_of_items='complement', random_state=0)    
         

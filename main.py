@@ -3,7 +3,7 @@ from price_discrete import PriceDiscrete
 from plot_promotion_plan import PlotPromotionPlan
 # import json
 # from demand import Demand
-from flask import Flask, jsonify, Response
+from flask import Flask, jsonify, Response, request
 app = Flask(__name__)
 
 #from demand import Demand
@@ -12,9 +12,10 @@ app = Flask(__name__)
 def hello():
     return 'John Rules!'
     
-@app.route("/v1/model", methods=['GET'])
-def generate_model():
-    return DemandLogLogCrossItem(N_items=3, T_periods=5, type_of_items='substitute', random_state=0).dump_model()
+@app.route("/v1/create", methods=['POST'])
+def create():
+    params = request.get_json()
+    return DemandLogLogCrossItem(N_items=params['N_items'], T_periods=params['T_periods'], type_of_items=params['type_of_items']).dump_model()
     
 @app.route("/v1/plot", methods=['GET'])
 def plot():
