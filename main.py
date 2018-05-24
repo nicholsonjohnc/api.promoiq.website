@@ -1,7 +1,9 @@
 from demand_log_log_cross_item import DemandLogLogCrossItem
+from price_discrete import PriceDiscrete
+from plot_promotion_plan import PlotPromotionPlan
 # import json
 # from demand import Demand
-from flask import Flask, jsonify
+from flask import Flask, jsonify, Response
 app = Flask(__name__)
 
 #from demand import Demand
@@ -14,8 +16,14 @@ def hello():
 def generate_model():
     return DemandLogLogCrossItem(N_items=3, T_periods=5, type_of_items='substitute', random_state=0).dump_model()
     
-
+@app.route("/v1/plot", methods=['GET'])
+def plot():
+    demand = DemandLogLogCrossItem(N_items=3, T_periods=5, type_of_items='substitute')
+    price = PriceDiscrete(demand.model)
+    plot = PlotPromotionPlan(model=demand.model, price=price).plot()
+    # return plot
+    return Response(plot, mimetype='text/xml')
  
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=80)
-    # app.run(host='127.0.0.1', debug=True, port=8080)
+    # app.run(host='0.0.0.0', debug=True, port=80)
+    app.run(host='127.0.0.1', debug=True, port=8080)
