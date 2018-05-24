@@ -23,10 +23,11 @@ def create():
 def plot():
     model = request.get_json()
     # demand = DemandLogLogCrossItem(model=model)
-    price = PriceDiscrete(model=model)
-    plot = PlotPromotionPlan(model=model, price=price).plot()
+    # price = PriceDiscrete(model=model)
+    # plot = PlotPromotionPlan(model=model, price=price).plot()
     # return plot
-    return Response(plot, mimetype='text/xml')
+    # return Response(plot, mimetype='text/xml')
+    return model
  
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', debug=True, port=80)
