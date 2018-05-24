@@ -26,9 +26,7 @@ def plot():
     model = DemandLogLogCrossItem().load_model(json.dumps(params))
     price = PriceDiscrete(model=model)
     plot = PlotPromotionPlan(model=model, price=price).plot()
-    # return plot
     return Response(plot, mimetype='text/xml')
-    # return jsonify(price.gamma_decision_variable)
  
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', debug=True, port=80)
